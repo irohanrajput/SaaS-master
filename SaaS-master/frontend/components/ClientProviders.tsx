@@ -1,0 +1,11 @@
+'use client'
+
+import { SubscriptionProvider } from '@/contexts/SubscriptionContext'
+
+export default function ClientProviders({ children }: { children: React.ReactNode }) {
+  return (
+    <SubscriptionProvider>
+      {children}
+    </SubscriptionProvider>
+  )
+}

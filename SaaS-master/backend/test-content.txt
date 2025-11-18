@@ -1,0 +1,222 @@
+=================================
+ChangeDetection.io API Test Suite
+=================================
+Base URL: https://changedetection-competitor.onrender.com
+API Key: 7e9ca5c1...
+
+📝 TEST 1: Adding watch for MY site...
+URL: https://agenticforge.tech/
+✅ Success! Watch added.
+Response: {
+  "uuid": "703f2342-db23-4991-add7-b94357eda311"
+}
+
+📝 TEST 2: Adding watch for COMPETITOR site...
+URL: https://pes.edu/
+✅ Success! Watch added.
+Response: {
+  "uuid": "80d83b10-6c4f-4dac-b59e-38c01df67d8b"
+}
+
+📝 TEST 3: Listing all watches...
+✅ Success! Found watches:
+Total watches: 4
+
+  UUID: 4f25d00e-cdc7-48a3-a7f4-09bda0bd42c4
+  URL: https://news.ycombinator.com/
+  Tag: none
+  Title: untitled
+  Last checked: 1760853156
+  Last changed: never
+
+  UUID: 98f0defd-4a7c-4bef-b7fa-bbe6c2a2c903
+  URL: https://changedetection.io/CHANGELOG.txt
+  Tag: none
+  Title: untitled
+  Last checked: 1760853156
+  Last changed: never
+
+  UUID: 703f2342-db23-4991-add7-b94357eda311
+  URL: https://agenticforge.tech/
+  Tag: none
+  Title: My Site Monitor
+  Last checked: 1760853687
+  Last changed: never
+
+  UUID: 80d83b10-6c4f-4dac-b59e-38c01df67d8b
+  URL: https://pes.edu/
+  Tag: none
+  Title: Competitor Monitor
+  Last checked: 1760853690
+  Last changed: never
+
+📝 TEST 4: Getting details for watch 80d83b10-6c4f-4dac-b59e-38c01df67d8b...
+✅ Success! Watch details:
+{
+  "body": null,
+  "browser_steps": [],
+  "browser_steps_last_error_step": null,
+  "conditions": {},
+  "conditions_match_logic": "ALL",
+  "check_count": 1,
+  "check_unique_lines": false,
+  "consecutive_filter_failures": 0,
+  "content-type": "text/html; charset=utf-8",
+  "date_created": 1760853689,
+  "extract_text": [],
+  "fetch_backend": "html_requests",
+  "fetch_time": 3.369,
+  "filter_failure_notification_send": true,
+  "filter_text_added": true,
+  "filter_text_removed": true,
+  "filter_text_replaced": true,
+  "follow_price_changes": true,
+  "has_ldjson_price_data": false,
+  "headers": {},
+  "ignore_text": [],
+  "ignore_status_codes": null,
+  "in_stock_only": true,
+  "include_filters": [],
+  "last_checked": 1760853690,
+  "last_error": false,
+  "last_notification_error": false,
+  "last_viewed": 0,
+  "method": "GET",
+  "notification_alert_count": 0,
+  "notification_body": null,
+  "notification_format": "System default",
+  "notification_muted": false,
+  "notification_screenshot": false,
+  "notification_title": null,
+  "notification_urls": [],
+  "page_title": "PES University",
+  "paused": false,
+  "previous_md5": "a31126ad77a9c067dbdb795a256de06f",
+  "previous_md5_before_filters": "04180f32accc84aad19fbd3cd7344310",
+  "processor": "text_json_diff",
+  "price_change_threshold_percent": null,
+  "proxy": null,
+  "remote_server_reply": "apache",
+  "sort_text_alphabetically": false,
+  "strip_ignored_lines": null,
+  "subtractive_selectors": [],
+  "tag": "",
+  "tags": [
+    "f6e6569c-799b-4b54-8ad1-66fb2e7344c6"
+  ],
+  "text_should_not_be_present": [],
+  "time_between_check": {
+    "weeks": null,
+    "days": null,
+    "hours": null,
+    "minutes": null,
+    "seconds": null
+  },
+  "time_between_check_use_default": true,
+  "time_schedule_limit": {
+    "enabled": false,
+    "monday": {
+      "enabled": true,
+      "start_time": "00:00",
+      "duration": {
+        "hours": "24",
+        "minutes": "00"
+      }
+    },
+    "tuesday": {
+      "enabled": true,
+      "start_time": "00:00",
+      "duration": {
+        "hours": "24",
+        "minutes": "00"
+      }
+    },
+    "wednesday": {
+      "enabled": true,
+      "start_time": "00:00",
+      "duration": {
+        "hours": "24",
+        "minutes": "00"
+      }
+    },
+    "thursday": {
+      "enabled": true,
+      "start_time": "00:00",
+      "duration": {
+        "hours": "24",
+        "minutes": "00"
+      }
+    },
+    "friday": {
+      "enabled": true,
+      "start_time": "00:00",
+      "duration": {
+        "hours": "24",
+        "minutes": "00"
+      }
+    },
+    "saturday": {
+      "enabled": true,
+      "start_time": "00:00",
+      "duration": {
+        "hours": "24",
+        "minutes": "00"
+      }
+    },
+    "sunday": {
+      "enabled": true,
+      "start_time": "00:00",
+      "duration": {
+        "hours": "24",
+        "minutes": "00"
+      }
+    }
+  },
+  "title": "Competitor Monitor",
+  "track_ldjson_price_data": null,
+  "trim_text_whitespace": false,
+  "remove_duplicate_lines": false,
+  "trigger_text": [
+    "price",
+    "pricing",
+    "new",
+    "feature",
+    "launch"
+  ],
+  "url": "https://pes.edu/",
+  "use_page_title_in_list": null,
+  "uuid": "80d83b10-6c4f-4dac-b59e-38c01df67d8b",
+  "webdriver_delay": null,
+  "webdriver_js_execute_code": null,
+  "content_type": "text/html; charset=utf-8",
+  "last_check_status": 200,
+  "history_n": 1,
+  "last_changed": 0,
+  "viewed": false,
+  "link": [
+    "https://pes.edu/"
+  ]
+}
+
+📝 TEST 5: Getting change history for 80d83b10-6c4f-4dac-b59e-38c01df67d8b...
+✅ Success! History:
+Total snapshots: 0
+
+📝 TEST 6: Updating watch 80d83b10-6c4f-4dac-b59e-38c01df67d8b...
+✅ Success! Watch updated.
+Response: "OK"
+
+=================================
+✅ All tests completed!
+=================================
+
+📊 Key Findings:
+1. trigger_text must be an ARRAY: ["keyword1", "keyword2"]
+2. Watch UUID format: 80d83b10-6c4f-4dac-b59e-38c01df67d8b
+3. Watches are checked automatically by ChangeDetection.io
+4. Use PUT to update watch settings
+
+Next steps:
+1. Check responses above for structure
+2. Visit dashboard: https://changedetection-competitor.onrender.com
+3. Integrate into your backend based on these results
