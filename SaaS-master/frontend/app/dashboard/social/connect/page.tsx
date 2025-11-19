@@ -60,6 +60,9 @@ export default function SocialConnectPage() {
   const handleConnectPlatform = async (platformName: string) => {
     setIsLoading(platformName)
     try {
+      console.log(`Attempting to connect ${platformName}...`)
+      console.log(`API URL: ${API_URL}`)
+      
       const response = await fetch(`${API_URL}/api/social/connect`, {
         method: 'POST',
         headers: {
@@ -68,7 +71,10 @@ export default function SocialConnectPage() {
         body: JSON.stringify({ platform: platformName }),
       })
 
+      console.log(`Response status: ${response.status}`)
+      
       const result = await response.json()
+      console.log(`Response result:`, result)
       
       if (result.success) {
         // Update platform connection status
@@ -80,11 +86,14 @@ export default function SocialConnectPage() {
           )
         )
         console.log(`${platformName} connected:`, result)
+        alert(`${platformName} connected successfully!`)
       } else {
         console.error(`Failed to connect ${platformName}:`, result.message)
+        alert(`Failed to connect ${platformName}: ${result.message}`)
       }
     } catch (error) {
       console.error(`Error connecting ${platformName}:`, error)
+      alert(`Error connecting ${platformName}: ${error instanceof Error ? error.message : 'Unknown error'}`)
     } finally {
       setIsLoading(null)
     }
@@ -93,6 +102,8 @@ export default function SocialConnectPage() {
   const handleDisconnectPlatform = async (platformName: string) => {
     setIsLoading(platformName)
     try {
+      console.log(`Attempting to disconnect ${platformName}...`)
+      
       const response = await fetch(`${API_URL}/api/social/connect`, {
         method: 'DELETE',
         headers: {
@@ -101,7 +112,10 @@ export default function SocialConnectPage() {
         body: JSON.stringify({ platform: platformName }),
       })
 
+      console.log(`Disconnect response status: ${response.status}`)
+      
       const result = await response.json()
+      console.log(`Disconnect result:`, result)
       
       if (result.success) {
         // Update platform connection status
@@ -113,11 +127,14 @@ export default function SocialConnectPage() {
           )
         )
         console.log(`${platformName} disconnected:`, result)
+        alert(`${platformName} disconnected successfully!`)
       } else {
         console.error(`Failed to disconnect ${platformName}:`, result.message)
+        alert(`Failed to disconnect ${platformName}: ${result.message}`)
       }
     } catch (error) {
       console.error(`Error disconnecting ${platformName}:`, error)
+      alert(`Error disconnecting ${platformName}: ${error instanceof Error ? error.message : 'Unknown error'}`)
     } finally {
       setIsLoading(null)
     }

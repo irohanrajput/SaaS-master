@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import {
@@ -137,6 +138,7 @@ interface SocialData {
 
 // --- Main Component ---
 export default function SocialDashboard({ userEmail = 'test@example.com' }: SocialMediaMetricsCardProps) {
+  const router = useRouter()
   // Log the email being used
   console.log('🔐 SocialDashboard initialized with email:', userEmail);
 
@@ -1382,8 +1384,14 @@ export default function SocialDashboard({ userEmail = 'test@example.com' }: Soci
 
       {/* Blurred Modal for Connect Facebook/LinkedIn/Instagram */}
       {showConnectModal && ((network === 'facebook' && !connected) || (network === 'linkedin' && !linkedinConnected) || (network === 'instagram' && !instagramConnected)) && !checkingConnection && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm">
           <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md mx-auto text-center relative">
+            <button 
+              className="absolute top-4 right-4 z-[10000] text-gray-400 hover:text-gray-600 transition-colors" 
+              onClick={() => setShowConnectModal(false)}
+            >
+              ✕
+            </button>
             <h2 className="text-2xl font-bold mb-2 text-gray-900">
               {network === 'facebook' ? 'Connect Facebook' : network === 'instagram' ? 'Connect Your Facebook Page' : 'Connect LinkedIn'}
             </h2>
@@ -1418,11 +1426,13 @@ export default function SocialDashboard({ userEmail = 'test@example.com' }: Soci
 
             {network === 'linkedin' && (
               <div className="flex flex-col gap-4">
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800 text-left">
-                  <p className="font-medium mb-2">💼 LinkedIn Community Management API</p>
-                  <p className="text-xs mb-2">Connect your LinkedIn account to access your organization pages and metrics.</p>
-                  <p className="text-xs font-medium">✅ Make sure you have admin access to a LinkedIn Company Page.</p>
-                </div>
+                <input
+                  type="url"
+                  placeholder="https://linkedin.com/company/your-company"
+                  value={linkedinUrl}
+                  onChange={(e) => setLinkedinUrl(e.target.value)}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
                 <Button
                   className="bg-blue-800 hover:bg-blue-900 text-white"
                   onClick={connectLinkedIn}
@@ -1431,10 +1441,6 @@ export default function SocialDashboard({ userEmail = 'test@example.com' }: Soci
                 </Button>
               </div>
             )}
-
-            <button className="absolute top-3 right-3 text-gray-400 hover:text-gray-600" onClick={() => setShowConnectModal(false)}>
-              ✕
-            </button>
           </div>
         </div>
       )}
@@ -2109,7 +2115,10 @@ export default function SocialDashboard({ userEmail = 'test@example.com' }: Soci
             <p className="text-sm text-gray-500 mb-6">
               {socialData?.reason || 'Connect your platform account to view social metrics'}
             </p>
-            <Button className="bg-orange-600 hover:bg-orange-700 text-white px-6">
+            <Button 
+              className="bg-orange-600 hover:bg-orange-700 text-white px-6"
+              onClick={() => router.push('/dashboard/social/connect')}
+            >
               Connect Platform
             </Button>
           </CardContent>

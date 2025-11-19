@@ -140,13 +140,13 @@ export default function DashboardHeaderClient({ user, onMenuClick, onDownloadRep
               >
                 <Bell className="h-5 w-5" />
                 {unreadCount > 0 && (
-                  <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                  <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full z-10"></span>
                 )}
               </button>
 
               {/* Notifications Dropdown */}
               {showNotifications && (
-                <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-lg shadow-xl border border-gray-200 z-50">
+                <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-lg shadow-xl border border-gray-200 z-40">
                   <div className="p-4 border-b border-gray-200">
                     <div className="flex items-center justify-between mb-2">
                       <h3 className="text-lg font-bold text-gray-900">Notifications</h3>
@@ -242,7 +242,7 @@ export default function DashboardHeaderClient({ user, onMenuClick, onDownloadRep
 
               {/* Profile Dropdown Menu */}
               {showProfileMenu && (
-                <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-200 z-50">
+                <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-200 z-40">
                   <div className="p-4 border-b border-gray-200">
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
@@ -324,7 +324,7 @@ export default function DashboardHeaderClient({ user, onMenuClick, onDownloadRep
       {/* Click outside to close dropdowns */}
       {(showNotifications || showProfileMenu) && (
         <div
-          className="fixed inset-0 z-40"
+          className="fixed inset-0 z-30"
           onClick={() => {
             setShowNotifications(false)
             setShowProfileMenu(false)

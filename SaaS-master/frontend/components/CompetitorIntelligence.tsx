@@ -410,61 +410,49 @@ export default function CompetitorIntelligence() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Fixed Header - Professional Design */}
-      <div className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-[100]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-orange-500 rounded-lg">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-              </div>
-              <div>
-                <h1 className="text-xl sm:text-2xl font-semibold text-gray-900">
-                  Competitor Intelligence
-                </h1>
-                <p className="text-xs text-gray-500 mt-0.5">
-                  Comprehensive business and competitive analysis
-                </p>
-              </div>
-            </div>
-            {businessInfo.business_domain && (
-              <Badge className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white border-0 px-3 py-1.5 text-xs font-medium">
-                <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></div>
-                {businessInfo.business_domain}
-              </Badge>
-            )}
-          </div>
+    <div className="p-8 space-y-6">
+      {/* Header - Dashboard Style */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">Competitor Intelligence</h1>
+          <p className="text-gray-600 mt-1">Comprehensive business and competitive analysis</p>
         </div>
+        {businessInfo.business_domain && (
+          <div className="flex-shrink-0 relative z-[10]">
+            <Badge className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white border-0 px-3 py-1.5 text-xs font-medium">
+              <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></div>
+              {businessInfo.business_domain}
+            </Badge>
+          </div>
+        )}
       </div>
 
-      {/* Main Content - Proper spacing below fixed header */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
-        {/* Error Alert */}
-        {error && (
-          <Alert variant="destructive" className="shadow-sm border border-red-200">
-            <AlertCircle className="h-4 w-4" />
-            <AlertTitle className="font-medium text-sm">Error</AlertTitle>
-            <AlertDescription className="text-sm">{error}</AlertDescription>
-          </Alert>
-        )}
+      {/* Error Alert */}
+      {error && (
+        <Alert variant="destructive" className="shadow-sm border border-red-200">
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle className="font-medium text-sm">Error</AlertTitle>
+          <AlertDescription className="text-sm">{error}</AlertDescription>
+        </Alert>
+      )}
 
-        {/* Loading State */}
-        {loading && (
-          <Card className="border border-gray-200 shadow-sm bg-white">
-            <CardContent className="py-12">
-              <div className="flex flex-col items-center gap-4">
-                <Loader2 className="w-10 h-10 animate-spin text-gray-900" />
-                <div className="text-center">
-                  <p className="font-medium text-lg text-gray-900">Analyzing competitor...</p>
-                  <p className="text-sm text-gray-500 mt-1">This may take 10-30 seconds</p>
-                </div>
+      {/* Loading State */}
+      {loading && (
+        <Card className="border border-gray-200 shadow-sm bg-white">
+          <CardContent className="py-12">
+            <div className="flex flex-col items-center gap-4">
+              <Loader2 className="w-10 h-10 animate-spin text-gray-900" />
+              <div className="text-center">
+                <p className="font-medium text-lg text-gray-900">Analyzing competitor...</p>
+                <p className="text-sm text-gray-500 mt-1">This may take 10-30 seconds</p>
               </div>
-            </CardContent>
-          </Card>
-        )}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Main Content */}
+      <div className="space-y-6">
 
         {/* Steps Section - Clean layout without z-index issues */}
         <div className="space-y-5">
