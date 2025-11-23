@@ -83,13 +83,14 @@ class FacebookMetricsService {
     try {
       const tokens = await oauthTokenService.getTokens(userEmail, 'facebook');
       if (!tokens || !tokens.access_token) {
-        throw new Error('No Facebook access token found');
+        throw new Error('No Facebook access token found. Please connect your Facebook account.');
       }
 
       console.log('🔍 Fetching Facebook pages for user...');
+      const accessToken = tokens.access_token;
       const response = await axios.get(`${this.baseURL}/me/accounts`, {
         params: {
-          access_token: tokens.access_token,
+          access_token: accessToken,
           fields: 'id,name,access_token,category,fan_count,picture'
         }
       });

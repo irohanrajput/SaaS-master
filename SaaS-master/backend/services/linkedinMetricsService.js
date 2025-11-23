@@ -26,7 +26,7 @@ class LinkedInMetricsService {
       }
 
       console.log('🔍 Fetching LinkedIn basic profile...');
-      
+
       // Get basic profile using OpenID Connect userinfo endpoint
       const response = await axios.get('https://api.linkedin.com/v2/userinfo', {
         headers: {
@@ -61,11 +61,11 @@ class LinkedInMetricsService {
     try {
       const tokens = await oauthTokenService.getTokens(userEmail, 'linkedin');
       if (!tokens || !tokens.access_token) {
-        throw new Error('No LinkedIn access token found');
+        throw new Error('No LinkedIn access token found. Please connect your LinkedIn account.');
       }
 
       console.log('🔍 Fetching LinkedIn organizations for user...');
-      
+
       // Get organizations user has admin access to
       const response = await axios.get(`${this.baseURL}/organizationAcls`, {
         params: {

@@ -24,7 +24,6 @@ interface Platform {
 
 export default function SocialConnectPage() {
   const router = useRouter()
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3010'
   const [isLoading, setIsLoading] = useState<string | null>(null)
   const [platforms, setPlatforms] = useState<Platform[]>([
     {
@@ -61,9 +60,9 @@ export default function SocialConnectPage() {
     setIsLoading(platformName)
     try {
       console.log(`Attempting to connect ${platformName}...`)
-      console.log(`API URL: ${API_URL}`)
-      
-      const response = await fetch(`${API_URL}/api/social/connect`, {
+
+      // Call frontend API to get OAuth redirect URL
+      const response = await fetch(`/api/social/connect`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -72,29 +71,22 @@ export default function SocialConnectPage() {
       })
 
       console.log(`Response status: ${response.status}`)
-      
+
       const result = await response.json()
       console.log(`Response result:`, result)
-      
-      if (result.success) {
-        // Update platform connection status
-        setPlatforms(prev =>
-          prev.map(platform =>
-            platform.name === platformName
-              ? { ...platform, connected: true }
-              : platform
-          )
-        )
-        console.log(`${platformName} connected:`, result)
-        alert(`${platformName} connected successfully!`)
+
+      if (result.success && result.redirectUrl) {
+        // Redirect to OAuth provider
+        console.log(`Redirecting to OAuth: ${result.redirectUrl}`)
+        window.location.href = result.redirectUrl
       } else {
         console.error(`Failed to connect ${platformName}:`, result.message)
         alert(`Failed to connect ${platformName}: ${result.message}`)
+        setIsLoading(null)
       }
     } catch (error) {
       console.error(`Error connecting ${platformName}:`, error)
       alert(`Error connecting ${platformName}: ${error instanceof Error ? error.message : 'Unknown error'}`)
-    } finally {
       setIsLoading(null)
     }
   }
@@ -103,8 +95,8 @@ export default function SocialConnectPage() {
     setIsLoading(platformName)
     try {
       console.log(`Attempting to disconnect ${platformName}...`)
-      
-      const response = await fetch(`${API_URL}/api/social/connect`, {
+
+      const response = await fetch(`/api/social/connect`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -113,15 +105,15 @@ export default function SocialConnectPage() {
       })
 
       console.log(`Disconnect response status: ${response.status}`)
-      
+
       const result = await response.json()
       console.log(`Disconnect result:`, result)
-      
+
       if (result.success) {
         // Update platform connection status
-        setPlatforms(prev => 
-          prev.map(platform => 
-            platform.name === platformName 
+        setPlatforms(prev =>
+          prev.map(platform =>
+            platform.name === platformName
               ? { ...platform, connected: false }
               : platform
           )

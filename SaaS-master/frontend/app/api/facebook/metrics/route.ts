@@ -1,30 +1,61 @@
 import { NextResponse } from 'next/server'
+import { createClient } from '@/utils/supabase/server'
+
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
+
+if (!BACKEND_URL) {
+  throw new Error('NEXT_PUBLIC_BACKEND_URL environment variable is required')
+}
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url)
-  const email = searchParams.get('email')
-  const period = searchParams.get('period')
+  try {
+    const { searchParams } = new URL(request.url)
+    const email = searchParams.get('email')
+    const period = searchParams.get('period') || '7d'
 
-  // Mock Facebook metrics data
-  const mockData = {
-    success: true,
-    data: {
-      followers: 1250,
-      engagement: 4.2,
-      reach: 5600,
-      impressions: 12300,
-      posts: 24,
-      likes: 450,
-      comments: 89,
-      shares: 34,
-      period: period || '7d',
-      growth: {
-        followers: 12.5,
-        engagement: 8.3,
-        reach: 15.7
-      }
+    // If no email provided, try to get from session
+    let userEmail: string | null = email
+    if (!userEmail) {
+      const supabase = await createClient()
+      const { data: { user } } = await supabase.auth.getUser()
+      userEmail = user?.email || null
     }
-  }
 
-  return NextResponse.json(mockData)
+    if (!userEmail) {
+      return NextResponse.json(
+        { success: false, error: 'Email required' },
+        { status: 400 }
+      )
+    }
+
+    // Call backend for real Facebook metrics
+    const response = await fetch(
+      `${BACKEND_URL}/api/facebook/metrics?email=${encodeURIComponent(userEmail)}&period=${period}`
+    )
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}))
+      return NextResponse.json(
+        {
+          success: false,
+          error: errorData.error || 'Failed to fetch Facebook metrics',
+          connected: false
+        },
+        { status: response.status }
+      )
+    }
+
+    const data = await response.json()
+    return NextResponse.json(data)
+  } catch (error) {
+    console.error('Facebook metrics error:', error)
+    return NextResponse.json(
+      {
+        success: false,
+        error: 'Failed to fetch Facebook metrics',
+        connected: false
+      },
+      { status: 500 }
+    )
+  }
 }

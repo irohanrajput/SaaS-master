@@ -22,13 +22,13 @@ class InstagramMetricsService {
     try {
       // Try Instagram token first, fallback to Facebook token
       let tokens = await oauthTokenService.getTokens(userEmail, 'instagram');
-      
+
       // If no Instagram token, try Facebook token (since Instagram uses Facebook OAuth)
       if (!tokens || !tokens.access_token) {
         console.log('   ℹ️  No Instagram token found, trying Facebook token...');
         tokens = await oauthTokenService.getTokens(userEmail, 'facebook');
       }
-      
+
       if (!tokens || !tokens.access_token) {
         throw new Error('No Facebook/Instagram access token found. Please connect your Facebook account.');
       }
