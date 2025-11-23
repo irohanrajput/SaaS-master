@@ -3,7 +3,7 @@
 
 import axios from 'axios';
 
-const SEARCH_API_KEY = process.env.SEARCHAPI_KEY || 'wij3b8snhVpNb5eHfz8yhQvS';
+const SEARCH_API_KEY = process.env.SEARCHAPI_KEY;
 const SEARCH_API_URL = 'https://www.searchapi.io/api/v1/search';
 
 /**

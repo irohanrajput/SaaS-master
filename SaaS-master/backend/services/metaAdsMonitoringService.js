@@ -4,11 +4,11 @@
 
 import axios from 'axios';
 
-const SEARCH_API_KEY = process.env.SEARCHAPI_KEY || 'wij3b8snhVpNb5eHfz8yhQvS';
+const SEARCH_API_KEY = process.env.SEARCHAPI_KEY;
 const SEARCH_API_URL = 'https://www.searchapi.io/api/v1/search';
 
 
-const RAPIDAPI_KEY = process.env.RAPIDAPI_KEY || 'beb04a38acmsh6d3e993c54c2d4fp1a525fjsnecb3ffee9285';
+const RAPIDAPI_KEY = process.env.RAPIDAPI_KEY;
 const RAPIDAPI_HOST = 'facebook-pages-scraper2.p.rapidapi.com';
 const RAPIDAPI_BASE_URL = `https://${RAPIDAPI_HOST}`;
 

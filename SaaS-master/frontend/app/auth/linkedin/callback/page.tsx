@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { createClient } from '@/utils/supabase/client'
 import { Loader2 } from 'lucide-react'
 
-export default function LinkedInCallbackPage() {
+function LinkedInCallbackContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [status, setStatus] = useState<'processing' | 'success' | 'error'>('processing')
@@ -190,5 +190,19 @@ export default function LinkedInCallbackPage() {
         )}
       </div>
     </div>
+  )
+}
+
+export default function LinkedInCallbackPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center">
+          <div className="w-16 h-16 text-blue-600 animate-spin mx-auto mb-4">Loading...</div>
+        </div>
+      </div>
+    }>
+      <LinkedInCallbackContent />
+    </Suspense>
   )
 }

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 class InstagramEngagementService {
   constructor() {
-    this.rapidApiKey = process.env.RAPIDAPI_KEY || 'd844ab0f41msh81ef5a49f61ca81p1ce760jsn100d5e352ffa';
+    this.rapidApiKey = process.env.RAPIDAPI_KEY;
     this.baseUrl = 'https://instagram-statistics-api.p.rapidapi.com';
   }
 
@@ -173,10 +173,9 @@ class InstagramEngagementService {
         }));
 
       // Calculate engagement consistency (coefficient of variation)
+      let consistency = 'low';
       const interactionsData = activityData.map(d => d.interactions || 0).filter(val => val > 0);
-      if (interactionsData.length === 0) {
-        consistency = 'low';
-      } else {
+      if (interactionsData.length > 0) {
         const stdDev = this.calculateStdDev(interactionsData);
         const coefficientOfVariation = (stdDev / avgInteractions) * 100;
         consistency = coefficientOfVariation < 50 ? 'high' : coefficientOfVariation < 100 ? 'medium' : 'low';

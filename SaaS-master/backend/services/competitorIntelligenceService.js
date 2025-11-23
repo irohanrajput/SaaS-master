@@ -6,7 +6,7 @@ import axios from 'axios';
  */
 class CompetitorIntelligenceService {
   constructor() {
-    this.rapidApiKey = process.env.RAPIDAPI_KEY || '063de7c06amshea7f01093a04701p10666cjsnffd119d541d6';
+    this.rapidApiKey = process.env.RAPIDAPI_KEY;
     this.rapidApiHost = 'facebook-pages-scraper2.p.rapidapi.com';
   }
 

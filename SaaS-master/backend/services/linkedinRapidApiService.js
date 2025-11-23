@@ -3,7 +3,7 @@ import axios from 'axios';
 
 class LinkedInRapidApiService {
   constructor() {
-    this.rapidApiKey = process.env.RAPIDAPI_KEY || 'd67449dc75msha394daa5d291066p15b1b1jsn494656560ede';
+    this.rapidApiKey = process.env.RAPIDAPI_KEY;
     this.baseUrl = 'https://linkedin-data-api.p.rapidapi.com';
     this.cache = new Map();
   }

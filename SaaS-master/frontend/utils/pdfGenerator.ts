@@ -101,7 +101,7 @@ export const generatePDFReport = async (
     yPosition += 12
 
     pdf.setFontSize(48)
-    const scoreColor = analysisResult.overall_score >= 80 ? [34, 197, 94] : 
+    const scoreColor: [number, number, number] = analysisResult.overall_score >= 80 ? [34, 197, 94] :
                        analysisResult.overall_score >= 50 ? [249, 115, 22] : [239, 68, 68]
     pdf.setTextColor(...scoreColor)
     pdf.text(`${analysisResult.overall_score}`, 20, yPosition)
@@ -136,7 +136,7 @@ export const generatePDFReport = async (
       const label = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
       pdf.text(`${label}:`, 20, yPosition)
       
-      const scoreColor = value >= 80 ? [34, 197, 94] : value >= 50 ? [249, 115, 22] : [239, 68, 68]
+      const scoreColor: [number, number, number] = value >= 80 ? [34, 197, 94] : value >= 50 ? [249, 115, 22] : [239, 68, 68]
       pdf.setFontSize(11)
       pdf.setTextColor(...scoreColor)
       pdf.setFont(undefined, 'bold')
@@ -148,7 +148,7 @@ export const generatePDFReport = async (
       pdf.rect(20, yPosition + 2, 100, 4, 'F')
       
       // Progress bar fill
-      pdf.setFillColor(...scoreColor)
+      pdf.setFillColor(scoreColor[0], scoreColor[1], scoreColor[2])
       pdf.rect(20, yPosition + 2, (value / 100) * 100, 4, 'F')
       
       yPosition += 12
@@ -174,7 +174,7 @@ export const generatePDFReport = async (
         const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())
         pdf.text(`${label}:`, 20, yPosition)
         
-        const scoreColor = value >= 80 ? [34, 197, 94] : value >= 50 ? [249, 115, 22] : [239, 68, 68]
+        const scoreColor: [number, number, number] = value >= 80 ? [34, 197, 94] : value >= 50 ? [249, 115, 22] : [239, 68, 68]
         pdf.setTextColor(...scoreColor)
         pdf.setFont(undefined, 'bold')
         pdf.text(`${value}/100`, 110, yPosition)
@@ -267,7 +267,7 @@ export const generatePDFReport = async (
       yPosition += descriptionLines.length * 4.5
 
       pdf.setFontSize(8)
-      const impactColor = win.impact === 'high' ? [239, 68, 68] : 
+      const impactColor: [number, number, number] = win.impact === 'high' ? [239, 68, 68] :
                          win.impact === 'medium' ? [249, 115, 22] : [59, 130, 246]
       pdf.setTextColor(...impactColor)
       pdf.text(`Impact: ${win.impact.toUpperCase()}`, 25, yPosition)

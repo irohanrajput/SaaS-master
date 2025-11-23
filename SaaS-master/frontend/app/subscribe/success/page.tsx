@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -8,7 +8,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { CheckCircle, Download, ArrowRight, Loader2 } from 'lucide-react'
 
-export default function SubscribeSuccess() {
+function SubscribeSuccessContent() {
     const searchParams = useSearchParams()
     const router = useRouter()
     const sessionId = searchParams.get('session_id')
@@ -156,5 +156,17 @@ export default function SubscribeSuccess() {
                 </CardFooter>
             </Card>
         </div>
+    )
+}
+
+export default function SubscribeSuccess() {
+    return (
+        <Suspense fallback={
+            <div className="flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen p-4">
+                <div className="text-center">Loading...</div>
+            </div>
+        }>
+            <SubscribeSuccessContent />
+        </Suspense>
     )
 }
